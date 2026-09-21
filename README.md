@@ -16,6 +16,11 @@ cd devops-project
 
 Stack: **React** (port 3000) · **Node.js/Express** (port 8080) · **PostgreSQL 15** (port 5432)
 
+## Team Members
+
+- Albert anhstein (@ducanhnguyen223) — Team Leader
+- Tuan — Developer
+
 ---
 
 ## What You Need to Do
