@@ -64,21 +64,17 @@ jobs:
         run: npm test
 
       # ── Frontend ───────────────────────────────────────────────────────────
-      # STUDENT TODO: Uncomment this section to enable frontend tests in CI.
-      # Do this after you have verified that `npm test` passes locally in
-      # the frontend/ directory.
-      #
-      # - name: Set up Node.js (frontend)
-      #   uses: actions/setup-node@v4
-      #   with:
-      #     node-version: '18'
-      #     cache: 'npm'
-      #     cache-dependency-path: frontend/package-lock.json
-      #
-      # - name: Install frontend dependencies
-      #   working-directory: frontend
-      #   run: npm ci
-      #
-      # - name: Run frontend tests
-      #   working-directory: frontend
-      #   run: npm test
+      - name: Set up Node.js (frontend)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install frontend dependencies
+        working-directory: frontend
+        run: npm ci
+
+      - name: Run frontend tests
+        working-directory: frontend
+        run: npm test

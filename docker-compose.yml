@@ -37,24 +37,52 @@
 #      retries: 5
 # ===========================================
 
-version: '3.8'
-
 services:
-  # STUDENT TODO: Define frontend service
-  frontend:
-    build: ./frontend
-    # TODO: Add ports, depends_on
-
-  # STUDENT TODO: Define backend service
-  backend:
-    build: ./backend
-    # TODO: Add ports, environment, depends_on, healthcheck
-
-  # STUDENT TODO: Define postgres service
   postgres:
     image: postgres:15-alpine
-    # TODO: Add environment, ports, volumes, healthcheck
+    environment:
+      POSTGRES_DB: bugdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: bugpassword
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/database.sql:/docker-entrypoint-initdb.d/01-database.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d bugdb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
-# STUDENT TODO: Define named volumes
+  backend:
+    build: ./backend
+    ports:
+      - "8080:8080"
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: bugdb
+      DB_USER: postgres
+      DB_PASSWORD: bugpassword
+      PORT: 8080
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://localhost:8080/health').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        REACT_APP_API_URL: http://localhost:8080
+    ports:
+      - "3000:3000"
+    depends_on:
+      backend:
+        condition: service_healthy
+
 volumes:
   postgres_data:
