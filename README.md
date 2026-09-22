@@ -10,11 +10,31 @@
 ## Quick Start
 
 ```bash
-git clone https://github.com/longndt/devops-project.git
+git clone https://github.com/ducanhnguyen223/devops-project.git
 cd devops-project
 ```
 
 Stack: **React** (port 3000) · **Node.js/Express** (port 8080) · **PostgreSQL 15** (port 5432)
+
+To run the full stack locally:
+
+```bash
+docker compose up --build -d
+curl http://localhost:8080/health
+```
+
+Stop the project containers with `docker compose down`. Do not use `down -v`
+unless you intentionally want to remove the local PostgreSQL data volume.
+
+If Docker reports that host port `3000` or `8080` is already in use, stop the
+other local service using that port before starting this project. The Compose
+ports are part of the project specification and should not be changed for the
+submitted configuration.
+
+## Team Members
+
+- Albert anhstein (@ducanhnguyen223) — Team Leader
+- Tuan — Developer
 
 ---
 

@@ -20,6 +20,7 @@
   },
   "jest": {
     "testMatch": [
+      "<rootDir>/src/**/*.{spec,test}.{js,jsx}",
       "<rootDir>/tests/**/*.{spec,test}.{js,jsx}"
     ]
   },
