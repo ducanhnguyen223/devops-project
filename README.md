@@ -16,6 +16,10 @@ cd devops-project
 
 Stack: **React** (port 3000) · **Node.js/Express** (port 8080) · **PostgreSQL 15** (port 5432)
 
+## Team Members
+
+- Kieu Anh Tuan — [GitHub repository](https://github.com/katmedia0607/devops-project)
+
 ---
 
 ## What You Need to Do
