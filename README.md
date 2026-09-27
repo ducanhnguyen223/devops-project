@@ -33,7 +33,7 @@ submitted configuration.
 
 ## Team Members
 
-- Albert anhstein (@ducanhnguyen223) — Team Leader
+- Soukyu (@ducanhnguyen223) — Team Leader
 - Kieu Anh Tuan (@katmedia0607) — Developer ([GitHub repository](https://github.com/katmedia0607/devops-project))
 
 ---
