@@ -1,0 +1,33 @@
+# Development overrides for the local Docker Compose stack.
+#
+# Compose loads this file automatically when running:
+#   docker compose up
+#
+# The builder targets keep development dependencies such as nodemon and
+# react-scripts available inside the containers. Source mounts then allow
+# changes on the host to be picked up without rebuilding the images.
+
+services:
+  backend:
+    build:
+      context: ./backend
+      target: builder
+    command: npm run dev
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+
+  frontend:
+    build:
+      context: ./frontend
+      target: builder
+      args:
+        REACT_APP_API_URL: http://localhost:8080
+    command: npm run dev
+    environment:
+      HOST: 0.0.0.0
+      CHOKIDAR_USEPOLLING: "true"
+      REACT_APP_API_URL: http://localhost:8080
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules

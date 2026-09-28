@@ -1,0 +1,22 @@
+# Production overrides for the Docker Compose stack.
+#
+# Set DOCKER_USERNAME to the Docker Hub owner before starting production:
+#   DOCKER_USERNAME=my-user docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+
+services:
+  postgres:
+    restart: always
+
+  backend:
+    image: ${DOCKER_USERNAME:-your-dockerhub-username}/bug-tracker-backend:latest
+    build: !reset null
+    environment:
+      NODE_ENV: production
+    restart: always
+
+  frontend:
+    image: ${DOCKER_USERNAME:-your-dockerhub-username}/bug-tracker-frontend:latest
+    build: !reset null
+    environment:
+      NODE_ENV: production
+    restart: always
